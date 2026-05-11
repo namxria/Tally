@@ -44,7 +44,7 @@ public class ClienteController {
 
     @GetMapping("/criar")
     public ModelAndView criar() {
-        var mv = new ModelAndView("cliente/novo_cliente");
+        var mv = new ModelAndView("cliente/cadastrocliente");
         mv.addObject("criarClienteRequest", new CriarClienteRequest(null, null, null));
         return mv;
     }
@@ -56,7 +56,7 @@ public class ClienteController {
             var cliente = clienteService.criar(request);
             return new ModelAndView("redirect:/cliente/"+cliente.getId());
         } catch (Exception e) {
-            mv = new ModelAndView("cliente/novo_cliente");
+            mv = new ModelAndView("cliente/cadastrocliente");
             mv.addObject("criarClienteRequest", request);
             mv.addObject("erro", e.getMessage());
             return mv;

@@ -44,7 +44,7 @@ public class ProcedimentoController {
 
     @GetMapping("/criar")
     public ModelAndView criar() {
-        var mv = new ModelAndView("procedimento/novo_procedimento");
+        var mv = new ModelAndView("procedimento/cadastroprocedimento");
         mv.addObject("criarProcedimentoRequest", new CriarProcedimentoRequest(null, null, null));
         return mv;
     }

@@ -1,10 +1,6 @@
 package com.br.agenda.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,6 +9,7 @@ public class Procedimento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
 
     public Long getId() {

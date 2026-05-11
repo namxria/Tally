@@ -7,6 +7,7 @@ import com.br.agenda.repository.ProcedimentoRepository;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +31,16 @@ public class ProcedimentoService {
         if(Strings.isBlank(String.valueOf(request.valor()))){
             builder.append("Favor, informar o valor do procedimento.").append("\n");
         }
+        BigDecimal valor = new BigDecimal(
+                request.valor()
+                        .replace("R$", "")
+                        .replace(".", "")
+                        .replace(",", ".")
+                        .trim()
+        );
         var procedimento = new Procedimento();
         procedimento.setNome(request.nome());
-        procedimento.setValor(request.valor());
+        procedimento.setValor(valor);
         return procedimentoRepository.save(procedimento);
     }
 

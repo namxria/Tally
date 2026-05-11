@@ -58,7 +58,7 @@ public class AgendamentoController {
 
     @GetMapping("/criar")
     public ModelAndView criar() {
-        var mv = new ModelAndView("agenda/novo_agendamento");
+        var mv = new ModelAndView("agenda/criaragendamento");
         mv.addObject("clientes", clienteRepository.findAll());
         mv.addObject("procedimentos", procedimentoRepository.findAll());
         mv.addObject("criarAgendamentoRequest", new CriarAgendamentoRequest(null, null,null, null));
