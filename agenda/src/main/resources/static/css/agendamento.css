@@ -1,0 +1,222 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Gradiente linear de baixo para cima */
+    background-image: linear-gradient(
+        to top,
+        rgba(112, 162, 151, 0.1),
+        rgba(183, 219, 211, 0.1)
+    ) !important;
+}
+
+/*Conteúdo da Página*/
+.formulario__container {
+    background-color: #FFFF;
+    width: 100%;
+    max-width: 750px;
+    padding: 20px 30px 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: fade-in 4s;
+}
+
+.formulario__title-box {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.formulario__title-box span {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #414141;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #414141;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #595959;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    outline: none;
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+}
+
+.input-row .input-group {
+    flex-grow: 1;
+}
+
+.formulario__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancelar {
+    background-color: #6C757D;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background-color: #575e64;
+    color: white;
+}
+
+.btn-criar {
+    background-color: #70A297;
+    color: white;
+}
+
+.btn-criar:hover {
+    background-color: #5A877E;
+}
+
+.link-ver-agendamentos {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #70A297;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.link-ver-agendamentos:hover {
+    color: #648f85;
+    transform: scale(1.05);
+}
+
+/* Pop Up Ver Agendamentos */
+.hidden {
+    display: none !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 60%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    padding: 25px 30px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Barra de Rolagem */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #B0B0B0;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #70A297;
+}
+
+.modal-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #414141;
+}
+
+.modal-close {
+    font-size: 1.8em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6C757D;
+    padding: 0;
+}
+
+.agendamento-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.agendamento-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    background-color: #F4F4F4;
+    border-bottom: 1px solid #cacaca;
+    font-size: 1em;
+    color: #414141;
+}
+
+.actions-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn, .delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+.edit-btn {
+    background-color: #82AEA3;
+}
+
+.delete-btn {
+    background-color: #D34D4D;
+}

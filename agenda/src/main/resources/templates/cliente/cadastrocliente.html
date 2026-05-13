@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/img/Favicon.svg">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/cadastro.css}">
+
+    <title>Tally - A clareza que o seu crescimento exige.</title>
+</head>
+<body>
+<!-- Cabeçalho -->
+<header>
+    <div class="header__content">
+        <div class="logomarca">
+            <img src="/img/Logomarca.png" alt="Logomarca Tally">
+        </div>
+        <div class="icons__content">
+            <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank" class="header-icon"><img src="/img/Email.svg" alt="Botão de Email"></a>
+            <a href="https://web.whatsapp.com/" target="_blank" class="header-icon"><img src="/img/Whatsapp.svg" alt="Botão para Whatsapp"></a>
+        </div>
+    </div>
+</header>
+<!-- Menu Lateral -->
+<section class="sidenav">
+    <div class="sidenav__content">
+        <div class="menu">
+            <a href="/" class="category__menu"><img src="/img/Agendamento.svg" alt="Ícone Agenda"><span>Agenda</span></a>
+            <a href="/criaragendamento.html" class="category__menu"><img src="/img/CriarAgendamento.svg" alt="Ícone Criar Agendamento"><span>Criar Agendamento</span></a>
+            <a href="/cliente/criar" class="category__menu"><img src="/img/CadastroCliente.svg" alt="Ícone Cadastro de Cliente"><span>Cadastro de Cliente</span></a>
+            <a href="/procedimento/criar" class="category__menu"><img src="/img/CadastrodeServiços.svg" alt="Ícone Cadastro de Serviços"><span>Cadastro de Serviços</span></a>
+        </div>
+        <div class="settings">
+            <div class="item__settings"><div class="user-dot" id="userColor"></div><span id="Name">Nome</span></div> <!-- A classe user-dot vai permitir troca de cor / ID Name = Nome do Usuário -->
+            <a href="" class="item__settings configuration"><img src="img/Settings.svg"><span>Settings</span></a>
+        </div>
+    </div>
+</section>
+<section class="main">
+    <div class="formulario__container">
+        <div class="formulario__title-box">
+            <span>Novo Cliente:</span>
+        </div>
+
+        <form class="formulario__body" th:action="@{/cliente/criar}" method="post" th:object="${criarClienteRequest}">
+
+            <div class="input-group">
+                <label for="nome_cliente">Nome do Cliente:</label>
+                <input type="text" id="nome_cliente" name="cliente" th:field="*{nome}">
+            </div>
+
+            <div class="input-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" th:field="*{telefone}">
+            </div>
+
+            <div class="formulario__actions">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-cancelar-cadastro">Cancelar</button>
+                    <button type="submit" class="btn btn-cadastrar-cliente">Cadastrar Cliente</button>
+                </div>
+                <button type="button" class="link-ver-clientes" onclick="openModal()">Ver Todos os Clientes ></button>
+            </div>
+        </form>
+        <div th:if="${erro}">
+            <p th:text="${erro}"></p>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const telefoneInput = document.getElementById('telefone');
+      telefoneInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, ''); // remove tudo que não é número
+        if (value.length > 11) value = value.slice(0, 11); // limita a 11 dígitos
+
+        if (value.length > 6) {
+          e.target.value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+        } else if (value.length > 2) {
+          e.target.value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+        } else {
+          e.target.value = value;
+        }
+      });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+/* Resets */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', 'Arial';
+    margin: 0 auto;
+    background-color: rgb(250, 250, 250);
+    padding-top: 120px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font: inherit;
+}
+
+a:focus-visible {
+    outline: 2px solid #6EA39B;
+    border-radius: 4px;
+}
+
+button {
+    appearance: none;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+button:focus-visible {
+    outline: 2px solid #6EA39B;
+    border-radius: 4px;
+}
+
+/* Cabeçalho */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.header__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 12px;
+}
+
+.logomarca > img {
+    width: 150px;
+    animation: fade-in 4s;
+}
+
+.icons__content {
+    display: flex;
+    gap: 8px;
+    padding: 20px;
+    animation: fade-in 4s;
+}
+
+.header-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    transition: 0.3s;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background-color: #70A296;
+}
+
+.header-icon:hover {
+    transform: scale(1.05);
+    background-color: #5a8379;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* SideNav */
+.sidenav {
+    position: fixed;
+    top: 120px;
+    left: 0;
+    width: 25%;
+    height: calc(100vh - 120px);
+    background-color: #FBFBFF;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 4px 2px 24px -8px rgba(0, 0, 0, 25%);
+}
+
+.sidenav__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 42px;
+    height: 100%;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    animation: fade-in 4s;
+}
+
+.category__menu {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    border-radius: 8px;
+    transition: 0.3s;
+    animation: slide-in 0.4s ease-out both;
+}
+
+.category__menu:hover {
+    padding: 8px 12px;
+    background-color: #F4F4F4;
+}
+
+.category__menu > span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    animation: fade-in 4s;
+}
+
+.item__settings {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.configuration:hover {
+    padding: 0px 8px;
+    color: #414141;
+}
+
+/* Ícone colorido do Usuário */
+.user-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+/* Animação da Barra de Menu */
+.menu .category__menu:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.menu .category__menu:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.menu .category__menu:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.menu .category__menu:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Conteúdo Principal */
+.main {
+    position: fixed;
+    width: 75%;
+    right: 0;
+    top: 120px;
+    height: calc(100vh - 120px);
+    background-color: #F1F6F5;
+    padding: 20px;
+}
+
+.main__content {
+    height: 100%;
+    animation: fade-in 4s;
+}
+
+.schedule-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-header-fixed {
+    display: flex;
+    flex-shrink: 0;
+    border-bottom: 1px solid #E0E0E0;
+    background-color: #FFFFFF;
+}
+
+.time-header-placeholder {
+    width: 45px;
+    height: 50px;
+}
+
+.schedule-header {
+    display: flex;
+    flex-grow: 1;
+    height: 50px;
+}
+
+.day-tab {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F0F0F0;
+    border-left: 1px solid #B1B1B1;
+    font-family: "Inter";
+    font-weight: 600;
+}
+
+.schedule-scroll-area {
+    display: flex;
+    flex-grow: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.schedule-times {
+    width: 45px;
+    flex-shrink: 0;
+    text-align: right;
+    font-family: "Inter";
+    font-size: 12px;
+    color: #414141;
+}
+
+.schedule-times__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-slot {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #EEEEEE;
+    padding-right: 5px;
+}
+
+.schedule-body {
+    flex-grow: 1;
+    min-height: 1200px; /* ATENÇÃO: É vital que o min-height seja grande o suficiente para forçar a rolagem */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(24, 50px);
+    border-left: 1px solid #E0E0E0;
+}
+
+.schedule-body > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+    color: #4d6e67;
+}
+
