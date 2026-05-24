@@ -59,7 +59,13 @@
 
             <div class="input-group">
                 <label for="dataHora">Data e horário:</label>
-                <input type="datetime-local" id="dataHora" name="dataHora" th:field="*{dataHora}">
+                <input type="datetime-local" 
+                    id="dataHora" 
+                    name="dataHora" 
+                    th:field="*{dataHora}"
+                    data-placeholder-active="true"
+                    onfocus="this.removeAttribute('data-placeholder-active')"
+                    onblur="if(!this.value) this.setAttribute('data-placeholder-active', 'true')">
             </div>
 
             <div class="input-group">
