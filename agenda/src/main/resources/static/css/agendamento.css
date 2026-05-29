@@ -58,6 +58,41 @@ input[type="time"] {
     outline: none;
 }
 
+#cliente, #dataHora, #procedimento {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #595959;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    outline: none;
+}
+
+select:invalid {
+    color: #a0aec0; 
+    font-style: italic;     
+}
+
+select option {
+    color: #333333; 
+}
+
+select option[value=""] {
+    color: #a0aec0;
+}
+
+input[type="datetime-local"][data-placeholder-active="true"] {
+    color: #a0aec0;          
+    font-style: italic;     
+}
+
+input[type="datetime-local"]:focus,
+input[type="datetime-local"]:not([data-placeholder-active="true"]) {
+    color: #333333;          
+    font-style: normal;
+}
+
 .input-row {
     display: flex;
     gap: 20px;
