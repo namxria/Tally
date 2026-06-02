@@ -9,6 +9,7 @@ import com.br.agenda.repository.ProcedimentoRepository;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,9 @@ public class AgendamentoService {
         return agendamentoRepository.findAllByOrderByDataHoraAsc();
     }
 
+    public List<Agendamento> findByDataHoraBetween(LocalDateTime inicio, LocalDateTime fim) {
+        return agendamentoRepository.findByDataHoraBetween(inicio, fim);
+    }
     public Agendamento criar(CriarAgendamentoRequest request){
         StringBuilder builder = new StringBuilder();
         if(request.cliente() == null){

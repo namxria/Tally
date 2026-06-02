@@ -34,9 +34,6 @@ public class ProcedimentoController {
     @GetMapping("/{id}")
     public ModelAndView vizualizar(@PathVariable("id") Long id) {
         var optional = procedimentoService.obterPeloId(id);
-        if(optional.isEmpty()){
-            return new ModelAndView("procedimento/nao_ha_procedimentos");
-        }
         var mv = new ModelAndView("procedimento/visualizar_procedimento");
         mv.addObject("procedimento", optional.get());
         return mv;
@@ -66,9 +63,6 @@ public class ProcedimentoController {
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         var optional = procedimentoService.obterPeloId(id);
-        if(optional.isEmpty()){
-            return new ModelAndView("procedimento/nao_ha_procedimentos");
-        }
         var mv = new ModelAndView("procedimento/editar_procedimento");
         var procedimento = optional.get();
         var request = new EditarProcedimentoRequest(procedimento.getId(), procedimento.getNome(),procedimento.getValor());

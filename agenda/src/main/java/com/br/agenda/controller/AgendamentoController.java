@@ -48,9 +48,6 @@ public class AgendamentoController {
     @GetMapping("/{id:[0-9]+}")
     public ModelAndView vizualizar(@PathVariable("id") Long id) {
         var optional = agendamentoService.obterPeloId(id);
-        if(optional.isEmpty()){
-            return new ModelAndView("agenda/nao_ha_agendamentos");
-        }
         var mv = new ModelAndView("agenda/visualizar_agendamento");
         mv.addObject("agendamento", optional.get());
         return mv;
@@ -82,9 +79,6 @@ public class AgendamentoController {
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         var optional = agendamentoService.obterPeloId(id);
-        if(optional.isEmpty()){
-            return new ModelAndView("agenda/nao_ha_agendamentos");
-        }
         var mv = new ModelAndView("agenda/editar_agendamento");
         var agendamento = optional.get();
         var request = new EditarAgendamentoRequest(agendamento.getId(), agendamento.getCliente().getId(), agendamento.getProcedimento().getId(), agendamento.getDataHora());
@@ -106,28 +100,5 @@ public class AgendamentoController {
             return mv;
         }
     }
-
-    @GetMapping("/calendario_mensal")
-    public ModelAndView calendario(
-            @RequestParam(name = "mes", required = false) Integer mes,
-            @RequestParam(name = "ano", required = false) Integer ano)  {
-
-        var hoje = LocalDate.now();
-        if (mes == null) mes = hoje.getMonthValue();
-        if (ano == null) ano = hoje.getYear();
-
-        var primeiroDia = LocalDate.of(ano, mes, 1);
-        var ultimoDia = primeiroDia.withDayOfMonth(primeiroDia.lengthOfMonth());
-
-        var agendamentos = agendamentoService.findAllByOrderByDataHoraAsc();
-
-        ModelAndView mv = new ModelAndView("agenda/calendario_mensal");
-        mv.addObject("mes", mes);
-        mv.addObject("ano", ano);
-        mv.addObject("primeiroDia", primeiroDia);
-        mv.addObject("ultimoDia", ultimoDia);
-        mv.addObject("agendamentos", agendamentos);
-        return mv;
-    }
-    }
+}
 

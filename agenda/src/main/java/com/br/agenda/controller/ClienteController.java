@@ -34,9 +34,6 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ModelAndView vizualizar(@PathVariable("id") Long id) {
         var optional = clienteService.obterPeloId(id);
-        if(optional.isEmpty()){
-            return new ModelAndView("cliente/nao_ha_clientes");
-        }
         var mv = new ModelAndView("cliente/visualizar_cliente");
         mv.addObject("cliente", optional.get());
         return mv;
@@ -66,9 +63,6 @@ public class ClienteController {
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Long id) {
         var optional = clienteService.obterPeloId(id);
-        if(optional.isEmpty()){
-            return new ModelAndView("cliente/nao_ha_clientes");
-        }
         var mv = new ModelAndView("cliente/editar_cliente");
         var cliente = optional.get();
         var request = new EditarClienteRequest(cliente.getId(), cliente.getNome(),cliente.getTelefone());

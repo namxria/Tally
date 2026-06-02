@@ -23,7 +23,7 @@
             <tr th:each="c : ${clientes}">
                 <td th:text="${c.nome}">{c.nome}</td>
                 <td th:text="${c.telefone}">{c.telefone}</td>
-                <td><button type="button"><a th:href="@{/cliente/{id}(id=${c.id})}">Ver</a></button></td>
+                <td><button type="button"><a th:href="@{/cliente/editar/{id}(id=${c.id})}">Editar</a></button></td>
             </tr>
         </tbody>
     </table>

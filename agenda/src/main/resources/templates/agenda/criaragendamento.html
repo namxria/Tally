@@ -81,7 +81,7 @@
 
             <div class="formulario__actions">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button onclick="history.back()"  type="button" class="btn btn-cancelar">Cancelar</button>
                     <button type="submit" class="btn btn-criar">Criar Agendamento</button>
                 </div>
                 <button type="button" class="link-ver-agendamentos" onclick="openModal()">Ver Agendamentos ></button>
@@ -102,10 +102,10 @@
 
         <div class="modal-body">
             <ul class="agendamento-list">
-                <li class="agendamento-item">
-                    <span>Maria Eduarda Sacavem de Souza</span>
+                <li class="agendamento-item" th:each="a : ${agendamentos}">
+                    <span th:text="${a.cliente.nome} +' - '+ ${a.procedimento.nome}"></span>
                     <div class="actions-icons">
-                        <a class="edit-btn" href="/editaragendamento.html"><img src="/img/pencil-edit.svg"></a>
+                        <a th:href="@{/agenda/editar/{id}(id=${a.id})}" class="edit-btn" ><img src="/img/pencil-edit.svg"></a>
                         <a class="delete-btn"><img src="/img/trashcan-delete.svg"></a>
                     </div>
                 </li>

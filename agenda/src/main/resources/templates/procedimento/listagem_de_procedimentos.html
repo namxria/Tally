@@ -23,7 +23,7 @@
             <tr th:each="c : ${procedimentos}">
                 <td th:text="${c.nome}">{c.nome}</td>
                 <td th:text="'R$ ' + ${c.valor}">{c.valor}</td>
-                <td><button type="button"><a th:href="@{/procedimento/{id}(id=${c.id})}">Ver</a></button></td>
+                <td><button type="button"><a th:href="@{/procedimento/editar/{id}(id=${c.id})}">Editar</a></button></td>
             </tr>
         </tbody>
     </table>

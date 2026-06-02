@@ -31,7 +31,7 @@
                     <td th:text="${#temporals.format(a.dataHora, 'HH:mm')+ 'h'}">{a.dataHora}</td>
                     <td th:text="${a.procedimento.nome}">{a.procedimento.nome}</td>
                     <td th:text="'R$' + ${a.procedimento.valor}">{a.procedimento.valor}</td>
-                    <td><button type="button"><a th:href="@{/agenda/{id}(id=${a.id})}">Ver</a></button></td>
+                    <td><button type="button"><a th:href="@{/agenda/editar/{id}(id=${a.id})}">Editar</a></button></td>
                 </tr>
             </tbody>
         </table>

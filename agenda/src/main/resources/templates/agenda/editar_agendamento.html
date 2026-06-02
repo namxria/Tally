@@ -1,45 +1,156 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Agenda</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/img/Favicon.svg">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/agendamento.css}">
+
+    <title>Tally - A clareza que o seu crescimento exige.</title>
 </head>
 <body>
-    <h1>Editar agendamento</h1>
-    <form th:action="@{/agenda/editar}" method="post" th:object="${editarAgendamentoRequest}">
-        <input type="hidden" th:field="*{id}"/>
-        <label for="cliente">
-            <span>Cliente</span>
-            <select id="cliente" th:field="*{cliente}" required>
-                <option value="">Selecione um cliente</option>
-                <option th:each="c : ${clientes}"
-                        th:value="${c.id}"
-                        th:text="${c.nome}">
-                </option>
-            </select>
-        </label>
-        <br><br>
-        <label for="procedimento">
-            <span>Procedimento</span>
-            <select id="procedimento" th:field="*{procedimento}" required>
-                <option value="">Selecione um procedimento</option>
-                <option th:each="p : ${procedimentos}"
-                        th:value="${p.id}"
-                        th:text="${p.nome}">
-                </option>
-            </select>
-        </label>
-        <br><br>
-        <label for="data">
-            <span>Data</span>
-            <input id="data" th:field="*{dataHora}" type="datetime-local" required>
-        </label>
-        <br><br>
-        <div>
-            <button type="button"><a href="/agenda">Cancelar</a></button>
-            <button type="submit">Salvar alteração</button>
+<!-- Cabeçalho -->
+<header>
+    <div class="header__content">
+        <div class="logomarca">
+            <img src="/img/Logomarca.png" alt="Logomarca Tally">
         </div>
-    </form>
-    <div th:if="${erro}">
-        <p th:text="${erro}"></p>
+        <div class="icons__content">
+            <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl" target="_blank" class="header-icon"><img src="/img/Email.svg" alt="Botão de Email"></a>
+            <a href="https://web.whatsapp.com/" target="_blank" class="header-icon"><img src="/img/Whatsapp.svg" alt="Botão para Whatsapp"></a>
+        </div>
     </div>
+</header>
+<!-- Menu Lateral -->
+<section class="sidenav">
+    <div class="sidenav__content">
+        <div class="menu">
+            <a href="/" class="category__menu"><img src="/img/Agendamento.svg" alt="Ícone Agenda"><span>Agenda</span></a>
+            <a href="/agenda/criar" class="category__menu"><img src="/img/CriarAgendamento.svg" alt="Ícone Criar Agendamento"><span>Criar Agendamento</span></a>
+            <a href="/cliente/criar" class="category__menu"><img src="/img/CadastroCliente.svg" alt="Ícone Cadastro de Cliente"><span>Cadastro de Cliente</span></a>
+            <a href="/procedimento/criar" class="category__menu"><img src="/img/CadastrodeServiços.svg" alt="Ícone Cadastro de Serviços"><span>Cadastro de Serviços</span></a>
+        </div>
+        <div class="settings">
+            <div class="item__settings"><div class="user-dot" id="userColor"></div><span id="Name">Nome</span></div> <!-- A classe user-dot vai permitir troca de cor / ID Name = Nome do Usuário -->
+            <a href="" class="item__settings configuration"><img src="img/Settings.svg"><span>Settings</span></a>
+        </div>
+    </div>
+</section>
+<!-- Conteúdo da Página -->
+<section class="main">
+    <div class="formulario__container">
+        <div class="formulario__title-box" >
+            <span>Criar Agendamento:</span>
+        </div>
+
+        <form class="formulario__body" th:action="@{/agenda/editar}" method="post" th:object="${editarAgendamentoRequest}">
+
+            <input type="hidden" th:field="*{id}" />
+            <div class="input-group">
+                <label for="cliente">Cliente:</label>
+                <select id="cliente" th:field="*{cliente}" required>
+                    <option value="">Selecione um cliente</option>
+                    <option th:each="c : ${clientes}"
+                            th:value="${c.id}"
+                            th:text="${c.nome}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="dataHora">Data e horário:</label>
+                <input type="datetime-local"
+                       id="dataHora"
+                       name="dataHora"
+                       th:field="*{dataHora}"
+                       data-placeholder-active="true"
+                       onfocus="this.removeAttribute('data-placeholder-active')"
+                       onblur="if(!this.value) this.setAttribute('data-placeholder-active', 'true')">
+            </div>
+
+            <div class="input-group">
+                <label for="servico">Serviço:</label>
+                <select id="procedimento" th:field="*{procedimento}" required>
+                    <option value="">Selecione um procedimento</option>
+                    <option th:each="p : ${procedimentos}"
+                            th:value="${p.id}"
+                            th:text="${p.nome}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="formulario__actions">
+                <div class="btn-group">
+                    <button onclick="history.back()"  type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-criar">Criar Agendamento</button>
+                </div>
+                <button type="button" class="link-ver-agendamentos" onclick="openModal()">Ver Agendamentos ></button>
+            </div>
+        </form>
+        <div th:if="${erro}">
+            <p th:text="${erro}"></p>
+        </div>
+    </div>
+</section>
+<div id="agendamentos-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="modal-title">Lista de Agendamentos</span>
+            <button class="modal-close" onclick="closeModal()">
+                &times; </button>
+        </div>
+
+        <div class="modal-body">
+            <ul class="agendamento-list">
+                <li class="agendamento-item">
+                    <span>Maria Eduarda Sacavem de Souza</span>
+                    <div class="actions-icons">
+                        <a class="edit-btn" href="/editaragendamento.html"><img src="/img/pencil-edit.svg"></a>
+                        <a class="delete-btn"><img src="/img/trashcan-delete.svg"></a>
+                    </div>
+                </li>
+                <li class="agendamento-item">
+                    <span>Ana Maria Espíndula</span>
+                    <div class="actions-icons">
+                        <a class="edit-btn" href="/editaragendamento.html"><img src="/img/pencil-edit.svg"></a>
+                        <a class="delete-btn"><img src="/img/trashcan-delete.svg"></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    // Obtém o elemento modal (o overlay de fundo)
+    const modal = document.getElementById('agendamentos-modal');
+
+    // Funções de controle
+    function openModal() {
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        modal.classList.add('hidden');
+    }
+
+    // Fechamento ao clicar no overlay (clique fora do box branco)
+    document.addEventListener('DOMContentLoaded', () => {
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+    });
+
+    // (Opcional) Fechamento ao pressionar a tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+</script>
 </body>
 </html>

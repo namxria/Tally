@@ -89,6 +89,17 @@
                 <!-- Corpo da Tabela de Agendamentos -->
                 <div class="schedule-body">
                     <!-- Agendamentos serão posicionados aqui. Ex.: -->
+                    <a th:each="ag : ${agendamentos}"
+                       th:href="@{/agenda/{id}(id=${ag.id})}"
+                       class="appointment-card"
+                       th:style="'grid-column:' + ${ag.dataHora.dayOfWeek.value}
+                                 + ';grid-row:'  + (${ag.dataHora.hour} + 1)
+                                 + ';margin-top:calc(' + ${ag.dataHora.minute} + '/60*50px)'">
+                        <span class="appt-time"
+                              th:text="${#temporals.format(ag.dataHora,'HH:mm') + 'h'}"></span>
+                        <span class="appt-name" th:text="${ag.cliente.nome}"></span>
+                        <span class="appt-proc"  th:text="${ag.procedimento.nome}"></span>
+                    </a>
                 </div>
             </div>
         </div>
